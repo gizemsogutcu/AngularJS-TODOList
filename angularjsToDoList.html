@@ -20,13 +20,9 @@ app.controller("myController", function($scope, $sce){
 		$scope.yapilacaklarListesi.push({gorev:$scope.textBox, tarih:$scope.time});
 		$scope.textBox = "";
 		$scope.sortResults('gorev', true);
-
 	};
 
 	$scope.silme = function(x, y){
-		
-
-		//var index = $scope.indisBulma(y);
 		$scope.yapilacaklarListesi.splice(x,1);
 		$scope.silinenlerListesi.push(y);
 	};
@@ -41,7 +37,7 @@ app.controller("myController", function($scope, $sce){
 	};
 
 	$scope.sortResults = function(prop, asc){
-  $scope.yapilacaklarListesi = $scope.yapilacaklarListesi.sort(function(a, b) {
+ 	$scope.yapilacaklarListesi = $scope.yapilacaklarListesi.sort(function(a, b) {
         if (asc) {
             return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
         } else {
@@ -58,39 +54,25 @@ app.controller("myController", function($scope, $sce){
 <button ng-click="ekleme()" class="listeyeEkleButon">Listeye Ekle</button>
 <button ng-click="silinenler()" class="silinenleriGosterButon">Silinenleri Göster</button><br/><br/>
 <input type="text" ng-model="arama" placeholder="Arama yap" class="inputText2" />
-
-
-
 <table class="table1" ng-show="yapilacaklarListesi.length>0" ng-hide="(yapilacaklarListesi | filter:arama).length==0">
 	<th></th>
-    <th>Görev</th>
-    <th>Bitirme Tarihi</th>
-    <th></th>
+    	<th>Görev</th>
+    	<th>Bitirme Tarihi</th>
+    	<th></th>
 	<tr ng-repeat="yapilacak in yapilacaklarListesi | filter:arama | orderBy:'gorev'">
-    	<td><button ng-click="silme($index, yapilacak)" class="silButon">Sil</button></td>
-        <td>{{yapilacak.gorev}}</td>
-        <td>{{yapilacak.tarih}}</td>
-        <td><input type="date" ng-model="tarih" /> <button class="tarihGuncelleButon" ng-click="tarihGuncelle($index,tarih)">Tarih Güncelle</button></td>
-    </tr>
+    		<td><button ng-click="silme($index, yapilacak)" class="silButon">Sil</button></td>
+        	<td>{{yapilacak.gorev}}</td>
+        	<td>{{yapilacak.tarih}}</td>
+        	<td><input type="date" ng-model="tarih" /> <button class="tarihGuncelleButon" ng-click="tarihGuncelle($index,tarih)">Tarih Güncelle</button></td>
+   	 </tr>
 </table>
-
-
-
 <table class="table2" ng-show="deger">
 	<th cellpadding="2">Silinenler Listesi</th>
 	<tr ng-repeat="silinen in silinenlerListesi">
-        <td>{{silinen.gorev}}</td>
-    </tr>
+       		 <td>{{silinen.gorev}}</td>
+    	</tr>
 </table>
-
 <div ng-show="yapilacaklarListesi.length>0 && (yapilacaklarListesi | filter:arama).length==0" class="demo">Sonuç Bulunamadı</div>
-
-<!--
-<ul>
-    <li ng-repeat="a in yapilacaklarListesi">{{a.gorev}} {{a.tarih}}</li>
-</ul>
--->
-
 
 </body>
 </html>
